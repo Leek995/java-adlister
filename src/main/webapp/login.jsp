@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Login</title>
@@ -57,11 +58,17 @@
     <label for="username">Username</label>
         <input type="text" name="username" placeholder="Enter your username...">
     <label for="password">Password</label>
-        <input type="text" name="password" placeholder="Enter your password...">
+        <input type="password" name="password" placeholder="Enter your password...">
     <button type="submit">Login</button>
 </form>
-<p style="margin-top: 3em">"username" parameter: <%= request.getParameter("username") %></p>
-<p>"password" parameter: <%= request.getParameter("password") %></p>
+<p style="margin-top: 3em">"username" parameter:  ${param.username}</p>
+<p>"password" parameter: ${param.password}</p>
+<c:choose>
+    <c:when test='${param.username.equalsIgnoreCase("admin")}'>
+        <%response.sendRedirect("/profile.jsp");%>
+    </c:when>
+
+</c:choose>
 
 </body>
 </html>
